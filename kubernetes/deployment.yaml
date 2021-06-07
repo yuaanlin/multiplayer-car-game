@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: car-game
+  name: car-game
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: car-game
+  template:
+    metadata:
+      labels:
+        app: car-game
+    spec:
+      containers:
+        - image: asia.gcr.io/yuanlin-services/car-game:latest
+          name: car-game
+      restartPolicy: Always
