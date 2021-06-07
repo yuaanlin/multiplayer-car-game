@@ -4,7 +4,7 @@
   "description": "A simple multiplayer car game to practice three.js and websocket",
   "scripts": {
     "dev": "cp -r ./src/client/assets ./dist/client/assets & concurrently -k \"tsc -p ./src/server -w\" \"tsc -p ./src/client -w\" \"nodemon ./dist/server/server.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p ./src/server && tsc -p ./src/client && cp -r ./src/client/assets ./dist/client/assets ",
     "start": "node ./dist/server/server.js"
   },
   "author": "Yuanlin Lin",

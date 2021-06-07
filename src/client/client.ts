@@ -1,5 +1,9 @@
-import * as THREE from "/build/three.module.js";
-import { OrbitControls } from "/jsm/controls/OrbitControls";
+import * as THREE from '/build/three.module.js';
+import { OrbitControls } from '/jsm/controls/OrbitControls';
+
+alert(
+  'This game is still under develop, use WASD to control the green cube car'
+);
 
 const dv = 1;
 const da = 0.0005;
@@ -7,7 +11,7 @@ const MAX_SPEED = 0.05;
 const MAX_ACCELERATION = 1;
 
 const scene: THREE.Scene = new THREE.Scene();
-scene.background = new THREE.Color("white");
+scene.background = new THREE.Color('white');
 
 const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(
   75,
@@ -20,12 +24,12 @@ const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-var h = document.createElement("p"); // Create a <h1> element
-var t = document.createTextNode(""); // Create a text node
+var h = document.createElement('p'); // Create a <h1> element
+var t = document.createTextNode(''); // Create a text node
 h.appendChild(t);
-h.style.position = "absolute";
-h.style.top = "0";
-h.style.left = "0";
+h.style.position = 'absolute';
+h.style.top = '0';
+h.style.left = '0';
 document.body.append(h);
 
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -38,13 +42,15 @@ scene.add(cone);
 
 const cubeGeo: THREE.BoxGeometry = new THREE.BoxGeometry(2, 2, 2);
 const cubeMet: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({
+  wireframe: true,
+  wireframeLinewidth: 10,
   color: 0x00ff00,
 });
 const cube: THREE.Mesh = new THREE.Mesh(cubeGeo, cubeMet);
 scene.add(cube);
 cube.position.y = 1;
 
-window.addEventListener("resize", onWindowResize, false);
+window.addEventListener('resize', onWindowResize, false);
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -57,7 +63,7 @@ const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 
 const groundGeo = new THREE.PlaneGeometry(1000, 1000);
-const texture = new THREE.TextureLoader().load("assets/sand.jpg");
+const texture = new THREE.TextureLoader().load('assets/sand.jpg');
 const groundMet = new THREE.MeshBasicMaterial({
   map: texture,
   side: THREE.DoubleSide,
@@ -110,30 +116,30 @@ let r = 0;
 let d = 0;
 
 window.addEventListener(
-  "keydown",
+  'keydown',
   (event) => {
     const keyName = event.key;
-    if (keyName === "w" && a < MAX_ACCELERATION) {
+    if (keyName === 'w' && a < MAX_ACCELERATION) {
       a += (MAX_ACCELERATION - a) / 10;
     }
-    if (keyName === "s" && a > -MAX_ACCELERATION) {
+    if (keyName === 's' && a > -MAX_ACCELERATION) {
       a -= (MAX_ACCELERATION - a) / 10;
     }
-    if (keyName === "d") {
+    if (keyName === 'd') {
       r = -Math.PI / 4;
     }
-    if (keyName === "a") {
+    if (keyName === 'a') {
       r = Math.PI / 4;
     }
-    if (keyName === "r") {
+    if (keyName === 'r') {
       cube.position.set(0, 1, 0);
     }
   },
   false
 );
 
-window.addEventListener("keyup", (event) => {
-  if (event.key === "d" || event.key === "a") {
+window.addEventListener('keyup', (event) => {
+  if (event.key === 'd' || event.key === 'a') {
     r = 0;
   }
 });
